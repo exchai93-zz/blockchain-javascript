@@ -1,3 +1,5 @@
+const SHA256 = require('crypto-js/sha256')
+
 class Block {
   constructor(timestamp, data) {
     // Where in the chain the block is located
@@ -13,7 +15,7 @@ class Block {
 
   // Using the irreversible SHA256 function from the crypto-js library
   calculateHash() {
-
+    return SHA256(this.index + this.previousHash + this.timestamp + this.data + this.nonce).toString();
   }
 
   mineBlock(difficulty) {
