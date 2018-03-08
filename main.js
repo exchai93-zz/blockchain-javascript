@@ -61,5 +61,13 @@ class Blockchain {
 let jsChain = new Blockchain();
 jsChain.addBlock(new Block("07/03/2018", {amount: 5}));
 jsChain.addBlock(new Block("08/03/2018", {amount: 10}));
+
 console.log(JSON.stringify(jsChain, null, 4));
-console.log("Is blockchain valid?" + jsChain.checkValid());
+console.log("Is blockchain valid? " + jsChain.checkValid());
+
+// Tampering with the blockchain. Override the data in the first block
+jsChain.chain[1].data = { amount: 100 };
+// Recalculate the hash of the block 
+jsChain.chain[1].hash = jsChain.chain[1].calculateHash();
+
+console.log("Is blockchain valid? " + jsChain.checkValid());
