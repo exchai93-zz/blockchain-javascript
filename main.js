@@ -46,7 +46,7 @@ class Blockchain {
     for(let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
-
+      // Checks whether currentBlocks' info has been tampered with
       if (currentBlock.hash !== currentBlock.calculateHash()) {
         return false;
       }
@@ -57,3 +57,9 @@ class Blockchain {
     return true;
   }
 }
+
+let jsChain = new Blockchain();
+jsChain.addBlock(new Block("07/03/2018", {amount: 5}));
+jsChain.addBlock(new Block("08/03/2018", {amount: 10}));
+console.log(JSON.stringify(jsChain, null, 4));
+console.log("Is blockchain valid?" + jsChain.checkValid());
